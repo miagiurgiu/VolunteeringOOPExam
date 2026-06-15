@@ -90,3 +90,13 @@ const std::vector<Volunteer> & Repo::getAllVolunteers() const {
 void Repo::addVolunteer(const Volunteer &v) {
     volunteers.push_back(v);
 }
+
+void Repo::assignVolunteerToDepartment(const std::string &volunteerName, const std::string &departmentName) {
+    for (auto& v:volunteers) {
+        if (v.getName()==volunteerName && v.isUnassigned()) {
+            v.setDepartment(departmentName);
+            return;
+        }
+    }
+    throw std::runtime_error("Error at assigning volunteer to department");
+}

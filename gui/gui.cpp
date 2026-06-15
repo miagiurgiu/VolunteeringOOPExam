@@ -68,7 +68,21 @@ void GUI::addVolunteer() {
     }
 }
 
+void GUI::assignSelectedVolunteer() {
+    auto selectedItems=ui->unassignedVolunteersList->selectedItems();
+    if (selectedItems.empty())
+        return;
+    std::string volunteerName=selectedItems[0]->text().toStdString();
+    try {
+        service.assignVolunteerToDepartment(volunteerName,department.getName());
+    }
+    catch (const std::exception& e) {
+        QMessageBox::critical(this, "ERROR",e.what());
+    }
+}
+
 void GUI::connectSignalsAndSlots() {
     connect(ui->addButton,&QPushButton::clicked,this,&GUI::addVolunteer);
     connect(ui->topVolunteersButton,&QPushButton::clicked,this,&GUI::repopulateUnassignedList);
+    connect(ui->unassignedVolunteersList, &QListWidget::itemDoubleClicked, this, &GUI::assignSelectedVolunteer);
 }

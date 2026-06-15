@@ -30,7 +30,7 @@ private:
     void repopulateUnassignedList();
     void connectSignalsAndSlots();
     void addVolunteer();
-    void topVolunteers();
+    void assignSelectedVolunteer();
 };
 
 

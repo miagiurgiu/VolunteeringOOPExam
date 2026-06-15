@@ -70,7 +70,7 @@ double Service::computeScore(const Volunteer &volunteer, const Department &curre
     int nrWords=currentDepartment.getDescriptionNrOfWords();
     if (nrWords==0)
         return 0;
-    return matches*0.1/nrWords; // matches/nrWords would be integer division
+    return matches*1.0/nrWords; // matches/nrWords would be integer division
 }
 
 std::vector<Volunteer> Service::getTopVolunteers(Department currentDepartment) const {
@@ -92,4 +92,9 @@ std::vector<Volunteer> Service::getTopVolunteers(Department currentDepartment) c
     if (topVolunteers.size()>3)
         topVolunteers.resize(3);
     return topVolunteers;
+}
+
+void Service::assignVolunteerToDepartment(const std::string &volunteerName, const std::string &departmentName) {
+    repo.assignVolunteerToDepartment(volunteerName,departmentName);
+    notify();
 }

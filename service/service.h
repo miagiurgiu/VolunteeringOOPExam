@@ -19,6 +19,7 @@ public:
     void addVolunteer(const std::string& name, const std::string& email, const std::string& interestsText);
     double computeScore(const Volunteer& volunteer, const Department& currentDepartment) const;
     std::vector<Volunteer> getTopVolunteers(Department currentDepartment) const;
+    void assignVolunteerToDepartment(const std::string& volunteerName, const std::string& departmentName);
 };
 
 
