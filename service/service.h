@@ -20,6 +20,7 @@ public:
     double computeScore(const Volunteer& volunteer, const Department& currentDepartment) const;
     std::vector<Volunteer> getTopVolunteers(Department currentDepartment) const;
     void assignVolunteerToDepartment(const std::string& volunteerName, const std::string& departmentName);
+    std::vector<std::pair<Department,int>> getDepartmentsWithVolunteerCount() const;
 };
 
 

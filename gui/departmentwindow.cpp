@@ -8,11 +8,28 @@
 #include "ui_departmentWindow.h"
 
 
-departmentWindow::departmentWindow(QWidget *parent) :
-    QWidget(parent), ui(new Ui::departmentWindow) {
+departmentWindow::departmentWindow(Service& service, QWidget *parent) :QWidget(parent), ui(new Ui::departmentWindow), service{service} {
     ui->setupUi(this);
+    service.registerObserver(this);
+    populateList();
 }
 
 departmentWindow::~departmentWindow() {
+    service.unregisterObserver(this);
     delete ui;
+}
+
+void departmentWindow::update()
+{
+    populateList();
+}
+
+void departmentWindow::populateList() {
+    ui->departmentsListWidget->clear();
+    auto departments=service.getDepartmentsWithVolunteerCount();
+    for (const auto& pair:departments) {
+        auto departmentName=pair.first.getName();
+        auto count=pair.second;
+        ui->departmentsListWidget->addItem(QString::fromStdString(departmentName+": "+std::to_string(count))+ " volunteers");
+    }
 }

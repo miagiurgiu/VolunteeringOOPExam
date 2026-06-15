@@ -98,3 +98,17 @@ void Service::assignVolunteerToDepartment(const std::string &volunteerName, cons
     repo.assignVolunteerToDepartment(volunteerName,departmentName);
     notify();
 }
+
+std::vector<std::pair<Department, int>> Service::getDepartmentsWithVolunteerCount() const {
+    std::vector<std::pair<Department,int>> result;
+    auto departments=repo.getAllDepartments();
+    for (const auto& d: departments) {
+        auto volunteers=getVolunteersForDepartment(d.getName());
+        int nr=volunteers.size();
+        result.push_back({d,nr});
+    }
+    std::sort(result.begin(),result.end(),[](const auto& a, const auto& b) {
+        return a.second>b.second;
+    });
+    return result;
+}

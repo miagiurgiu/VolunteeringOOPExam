@@ -4,6 +4,7 @@
 #include "../domain/department.h"
 #include "../service/service.h"
 #include "../gui/gui.h"
+#include "../gui/departmentwindow.h"
 #include <QApplication>
 
 int main(int argc, char* argv[]) {
@@ -16,5 +17,9 @@ int main(int argc, char* argv[]) {
         gui->show();
         windows.push_back(gui);
     }
+    //auto* departmentsWindow=new departmentWindow{service};
+    // OR
+    departmentWindow departmentWindow{service};
+    departmentWindow.show();
     return app.exec();
 }
