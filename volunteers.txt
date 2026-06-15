@@ -5,6 +5,9 @@ Mihai Georgescu|mihai@gmail.com|sales,promotion,marketing|Marketing
 Ana Dumitru|ana@yahoo.com|emails,communication,sponsors|Communication
 Vlad Matei|vlad@gmail.com|events,social media,marketing|
 Ioana Pavel|ioana@yahoo.com|community,sponsors,communication|
-Cristian Pop|cristian@gmail.com|boxes,transport,events|
+Cristian Pop|cristian@gmail.com|boxes,transport,events|Communication
 Bianca Enache|bianca@yahoo.com|marketing,sales,social media|
-Rares Tudor|rares@gmail.com|organization,events,community|
+Rares Tudor|rares@gmail.com|organization,events,community|Communication
+JOHANNA|johanna@gmail.com|communication,commmmunnication,pr,marketing|Marketing
+jphn|rgr3|24t24r,pink|
+jojo|eoeoe@gmail.com|jojoj|

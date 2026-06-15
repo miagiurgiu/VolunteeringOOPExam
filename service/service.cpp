@@ -20,7 +20,7 @@ const std::vector<Volunteer> & Service::getAllVolunteers() const {
 
 std::vector<Volunteer> Service::getVolunteersForDepartment(const std::string &departmentName) const {
     std::vector<Volunteer> result;
-    auto volunteers=repo.getAllVolunteers();
+    const auto& volunteers=repo.getAllVolunteers();
     for (const auto& v:volunteers) {
         if (v.getDepartment()==departmentName)
             result.push_back(v);
@@ -33,7 +33,7 @@ std::vector<Volunteer> Service::getVolunteersForDepartment(const std::string &de
 
 std::vector<Volunteer> Service::getUnassignedVolunteers() const {
     std::vector<Volunteer> result;
-    auto volunteers=repo.getAllVolunteers();
+    const auto& volunteers=repo.getAllVolunteers();
     for (const auto& v: volunteers) {
         if (v.isUnassigned()) {
             result.push_back(v);
@@ -56,6 +56,7 @@ void Service::addVolunteer(const std::string &name, const std::string &email, co
 
     Volunteer volunteer{name,email,interests,""};
     repo.addVolunteer(volunteer);
+    repo.saveVolunteers(); // SAVE!!!
     notify(); /// for design pattern!!
 }
 
@@ -74,7 +75,7 @@ double Service::computeScore(const Volunteer &volunteer, const Department &curre
 }
 
 std::vector<Volunteer> Service::getTopVolunteers(Department currentDepartment) const {
-    auto volunteers=getUnassignedVolunteers();
+    const auto& volunteers=getUnassignedVolunteers();
     std::vector<std::pair<Volunteer,double>> result;
     std::vector<Volunteer> topVolunteers;
     for (auto v:volunteers) {
@@ -96,12 +97,13 @@ std::vector<Volunteer> Service::getTopVolunteers(Department currentDepartment) c
 
 void Service::assignVolunteerToDepartment(const std::string &volunteerName, const std::string &departmentName) {
     repo.assignVolunteerToDepartment(volunteerName,departmentName);
+    repo.saveVolunteers(); // SAVE!!!
     notify();
 }
 
 std::vector<std::pair<Department, int>> Service::getDepartmentsWithVolunteerCount() const {
     std::vector<std::pair<Department,int>> result;
-    auto departments=repo.getAllDepartments();
+    const auto& departments=repo.getAllDepartments();
     for (const auto& d: departments) {
         auto volunteers=getVolunteersForDepartment(d.getName());
         int nr=volunteers.size();

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <iostream>
 
 Repo::Repo(const std::string& departmentsFile, const std::string &volunteersFile):departmentsFile{departmentsFile},volunteersFile{volunteersFile} {
     loadDepartments();
@@ -76,6 +77,27 @@ void Repo::loadVolunteers() {
         volunteers.emplace_back(name,email,interests,department);
     }
     fin.close();
+}
+
+void Repo::saveVolunteers() {
+    std::ofstream fout(volunteersFile);
+    if (!fout.is_open()) {
+        throw std::runtime_error("Could not open file");
+    }
+    for (const auto& v:volunteers) {
+        fout<<v.getName()<<"|";
+        fout<<v.getEmail()<<"|";
+        auto interests=v.getInterests();
+        for (int i=0;i<interests.size();i++) {
+            fout<<interests[i];
+            if (i!=interests.size()-1)
+                fout<<",";
+        }
+        fout<<"|";
+        fout<<v.getDepartment();
+        fout<<"\n";
+    }
+    fout.close();
 }
 
 

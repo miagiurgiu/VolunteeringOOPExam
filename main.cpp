@@ -9,7 +9,7 @@
 
 int main(int argc, char* argv[]) {
     QApplication app(argc,argv);
-    Repo repo{"../departments.txt","../volunteers.txt"};
+    Repo repo{"/Users/Maria/Documents/GitHub/VolunteeringOOPExam/departments.txt","/Users/Maria/Documents/GitHub/VolunteeringOOPExam/volunteers.txt"};
     Service service{repo};
     std::vector<GUI*> windows;
     for (const auto& d:service.getAllDepartments()) { // as many windows as departments
@@ -21,5 +21,7 @@ int main(int argc, char* argv[]) {
     // OR
     departmentWindow departmentWindow{service};
     departmentWindow.show();
-    return app.exec();
+    int result=app.exec();
+    repo.saveVolunteers();
+    return result;
 }

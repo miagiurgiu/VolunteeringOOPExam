@@ -20,6 +20,7 @@ public:
     Repo(const std::string& departmentsFile, const std::string& volunteersFile);
     void loadDepartments();
     void loadVolunteers();
+    void saveVolunteers();
     const std::vector<Department>& getAllDepartments() const;
     const std::vector<Volunteer>& getAllVolunteers() const;
     void addVolunteer(const Volunteer& v);
