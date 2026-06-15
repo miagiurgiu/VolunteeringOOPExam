@@ -4,6 +4,9 @@
 
 #include "service.h"
 #include <algorithm>
+#include <sstream>
+#include <stdexcept>
+
 Service::Service(Repo &repo):repo{repo} {
 }
 
@@ -37,4 +40,56 @@ std::vector<Volunteer> Service::getUnassignedVolunteers() const {
         }
     }
     return result;
+}
+
+void Service::addVolunteer(const std::string &name, const std::string &email, const std::string &interestsText) {
+    if (name.empty() || email.empty()) {
+        throw std::runtime_error("Empty name/email");
+    }
+    std::vector<std::string> interests; // parsed interests
+    std::stringstream ss{interestsText};
+    std::string interest;
+    while (std::getline(ss,interest,',')) {
+        if (!interest.empty())
+            interests.push_back(interest);
+    }
+
+    Volunteer volunteer{name,email,interests,""};
+    repo.addVolunteer(volunteer);
+    notify(); /// for design pattern!!
+}
+
+double Service::computeScore(const Volunteer &volunteer, const Department &currentDepartment) const {
+    int matches=0;
+    auto interests=volunteer.getInterests();
+    for (const auto& i:interests) {
+        if (currentDepartment.getDescription().find(i)!=std::string::npos) { // we did find matching words
+            matches++;
+        }
+    }
+    int nrWords=currentDepartment.getDescriptionNrOfWords();
+    if (nrWords==0)
+        return 0;
+    return matches*0.1/nrWords; // matches/nrWords would be integer division
+}
+
+std::vector<Volunteer> Service::getTopVolunteers(Department currentDepartment) const {
+    auto volunteers=getUnassignedVolunteers();
+    std::vector<std::pair<Volunteer,double>> result;
+    std::vector<Volunteer> topVolunteers;
+    for (auto v:volunteers) {
+        double score=computeScore(v,currentDepartment);
+        result.push_back({v,score});
+    }
+    std::sort(result.begin(),result.end(),[](const auto& a, const auto& b) {
+        return a.second>b.second;
+    });
+
+    // extract volunteers from pairs -> new vector
+    for (const auto& pair: result) {
+        topVolunteers.push_back(pair.first);
+    }
+    if (topVolunteers.size()>3)
+        topVolunteers.resize(3);
+    return topVolunteers;
 }

@@ -16,6 +16,7 @@ public:
     Department(const std::string& name, const std::string& description);
     std::string getName() const;
     std::string getDescription() const;
+    int getDescriptionNrOfWords() const;
     ~Department()=default;
 };
 

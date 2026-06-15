@@ -22,6 +22,7 @@ public:
     void loadVolunteers();
     const std::vector<Department>& getAllDepartments() const;
     const std::vector<Volunteer>& getAllVolunteers() const;
+    void addVolunteer(const Volunteer& v);
 };
 
 

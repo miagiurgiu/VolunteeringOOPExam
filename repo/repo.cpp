@@ -86,3 +86,7 @@ const std::vector<Department> & Repo::getAllDepartments() const {
 const std::vector<Volunteer> & Repo::getAllVolunteers() const {
     return volunteers;
 }
+
+void Repo::addVolunteer(const Volunteer &v) {
+    volunteers.push_back(v);
+}

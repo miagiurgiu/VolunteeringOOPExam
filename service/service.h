@@ -5,9 +5,9 @@
 #ifndef VOLUNTEERINGOOPEXAM_SERVICE_H
 #define VOLUNTEERINGOOPEXAM_SERVICE_H
 #include "../repo/repo.h"
+#include "../domain/subject.h"
 
-
-class Service {
+class Service:public Subject {
 private:
     Repo& repo;
 public:
@@ -16,6 +16,9 @@ public:
     const std::vector<Volunteer>& getAllVolunteers() const;
     std::vector<Volunteer> getVolunteersForDepartment(const std::string& departmentName) const;
     std::vector<Volunteer> getUnassignedVolunteers() const;
+    void addVolunteer(const std::string& name, const std::string& email, const std::string& interestsText);
+    double computeScore(const Volunteer& volunteer, const Department& currentDepartment) const;
+    std::vector<Volunteer> getTopVolunteers(Department currentDepartment) const;
 };
 
 

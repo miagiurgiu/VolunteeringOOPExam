@@ -14,14 +14,14 @@
    <string>GUI</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
+   <item alignment="Qt::AlignmentFlag::AlignHCenter">
     <widget class="QLabel" name="descriptionLabel">
      <property name="text">
       <string>TextLabel</string>
      </property>
     </widget>
    </item>
-   <item>
+   <item alignment="Qt::AlignmentFlag::AlignHCenter">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>All volunteers belonging to department:</string>
@@ -31,7 +31,7 @@
    <item>
     <widget class="QListWidget" name="volunteersList"/>
    </item>
-   <item>
+   <item alignment="Qt::AlignmentFlag::AlignHCenter">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Unassigned volunteers:</string>
@@ -40,6 +40,57 @@
    </item>
    <item>
     <widget class="QListWidget" name="unassignedVolunteersList"/>
+   </item>
+   <item alignment="Qt::AlignmentFlag::AlignHCenter">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Add volunteer:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="nameLineEdit"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Email:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="emailLineEdit"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Interests:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="interestsLineEdit"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="addButton">
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="topVolunteersButton">
+     <property name="text">
+      <string>Search Top Volunteers</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
